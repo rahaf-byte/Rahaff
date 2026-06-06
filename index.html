@@ -21,7 +21,7 @@
 
         #countdown {
             position: absolute;
-            font-size: 4rem; /* مقاس أنسب للجوال */
+            font-size: 4.5rem; /* مقاس متناسق مع الجوالات */
             color: #c2185b;
             font-weight: bold;
             z-index: 200;
@@ -36,10 +36,10 @@
             align-items: center;
             width: 100%;
             max-width: 280px;
-            height: 260px;
+            height: 280px;
             position: relative;
             z-index: 100;
-            margin-top: -40px;
+            margin-top: -20px;
         }
 
         .candles-group {
@@ -79,8 +79,8 @@
 
         .Happy__Birthday {
             color: #c2185b; 
-            font-size: 1.8rem; /* تصغير الخط للجوال عشان ما ينقسم سطرين */
-            margin: 20px 0;
+            font-size: 1.7rem; /* مقاس يمنع الكلمة تنزل سطر جديد بالجوال */
+            margin: 15px 0;
             z-index: 100; 
             display: none; 
             text-align: center;
@@ -96,7 +96,7 @@
 
         #btns { 
             opacity: 0; 
-            margin-top: 10px; 
+            margin-top: 15px; 
             transition: 1s; 
             z-index: 2000; 
             position: relative;
@@ -116,40 +116,46 @@
         }
         #memory-btn { visibility: hidden; opacity: 0; background-color: #ad1457; }
 
-        /* تعديل المربعات الجانبية لتصبح متطابقة ووسط الشاشة تماماً في الجوال */
+        /* تعديل المربعات الجانبية لتفتح بالمنتصف بشكل منبثق فخم ومتناسق مع الجوال */
         .scroll {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.5); /* تبدأ مخفية وصغيرة في المنتصف */
+            transform: translate(-50%, -50%) scale(0.7); /* تبدأ بالمنتصف ومصغرة */
             width: 90%; 
             max-width: 320px; 
-            height: 70vh; 
+            height: 75vh; 
             background: #fdf5e6;
             border: 2px solid #d2b48c;
             border-radius: 15px;
             padding: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             z-index: 3000;
-            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow-y: auto;
             opacity: 0;
             pointer-events: none;
         }
         
-        /* تأثير الظهور الفخم في منتصف الشاشة */
-        .scroll.active { 
+        /* تفعيل الظهور والانتقال السلس في المنتصف عند الضغط للفتح */
+        #scroll-left.active { 
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
             pointer-events: auto;
         }
-        
-        #scroll-right { border-color: #c2185b; } 
+        #scroll-right.active { 
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #scroll-right { border-color: #c2185b; }
 
         .letter-content { font-family: 'Courier New', serif; color: #5d4037; font-size: 16px; line-height: 1.6; text-align: right; white-space: pre-wrap; }
         .date-badge { display: block; text-align: center; color: #c2185b; font-weight: bold; font-size: 1.2rem; border-bottom: 2px dashed #d2b48c; margin-bottom: 15px; padding-bottom: 10px; }
 
         .particle { position: absolute; bottom: -50px; animation: riseUp linear infinite; z-index: 10; }
+        @keyframes riseUp { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -173,12 +179,10 @@
         <button class="btn" id="memory-btn" onclick="openMemories()">✨ اضغط لرؤية تاريخنا</button>
     </div>
 
-    <!-- الرسالة (تظهر في المنتصف بشكل فخم) -->
     <div id="scroll-left" class="scroll">
         <div class="letter-content" id="letter-text"></div>
     </div>
 
-    <!-- الذكرى والتاريخ (تظهر في المنتصف أيضاً عند الضغط عليها) -->
     <div id="scroll-right" class="scroll">
         <span class="date-badge">2026 - JAN - 28</span>
         <div class="letter-content" style="text-align: center;">
@@ -202,22 +206,22 @@
         const letterTextEl = document.getElementById('letter-text');
         const openBtn = document.getElementById('open-btn');
         const memoryBtn = document.getElementById('memory-btn');
-        const message = "عيد ميلاد سعيد 🎂✨\nأتمنى لك سنة جديدة مليانة خير وفرح ونجاح في كل جوانب حياتك. لأنك شخص مهم بالنسبة لي والأيام اللي عرفتك فيها كانت مليانة لحظات حلوة وضحك ورسائل ومكالمات ما راح أنساها أبدًا. وأيامنا مع بعض علمتني أشياء كثيرة عن الحب والاهتمام واللحظات الجميلة اللي ممكن يعيشها الإنسان مع شخص يهمه.\n\nأتمنى لك من قلبي كل السعادة والراحة، والله يكتب لك أيام كلها خير وبركة، ويحقق كل اللي تتمناه في حياتك. وأتمنى لك ذكريات حلوة وفرح حقيقي في كل خطوة تخطوها، والله يجعل كل أيامك مليانة ضحك وحب ونجاح\nمن: رهف";
+        const message = "عيد ميلاد سعيد 🎂✨\nأتمنى لك سنة جديدة مليانة خير وفرح ونجاح في كل جوانب حياتك.  لأنك شخص مهم بالنسبة لي والأيام اللي عرفتك فيها كانت مليانة لحظات حلوة وضحك ورسائل ومكالمات ما راح أنساها أبدًا.  وأيامنا مع بعض علمتني أشياء كثيرة عن الحب والاهتمام واللحظات الجميلة اللي ممكن يعيشها الإنسان مع شخص يهمه.\n\nأتمنى لك من قلبي كل السعادة والراحة، والله يكتب لك أيام كلها خير وبركة، ويحقق كل اللي تتمناه في حياتك. وأتمنى لك ذكريات حلوة وفرح حقيقي في كل خطوة تخطوها، والله يجعل كل أيامك مليانة ضحك وحب ونجاح\nمن: رهف";
         
         let timer = setInterval(() => {
             let c = parseInt(countEl.innerText);
             if (c > 1) {
                 countEl.innerText = c - 1;
             } else if (c === 1) {
-                countEl.innerText = "انفخ 🌬️";
+                countEl.innerText = "انفخ 🌬️"; /* إضافة إيموجي لطيف وجعلها تظهر بالكامل */
                 clearInterval(timer);
                 setTimeout(() => {
-                    l1.style.top = "170px";
-                    setTimeout(() => { l2.style.top = "130px"; }, 300);
+                    l1.style.top = "180px";
+                    setTimeout(() => { l2.style.top = "140px"; }, 300);
                     setTimeout(() => {
-                        l3.style.top = "95px";
+                        l3.style.top = "105px";
                         candles.style.opacity = "1";
-                        candles.style.top = "65px"; 
+                        candles.style.top = "75px"; 
                         countEl.style.opacity = "0"; 
                         setTimeout(() => { countEl.style.display = "none"; }, 500);
                         setTimeout(blowOut, 1500);
@@ -242,7 +246,7 @@
                 if (i < message.length) {
                     letterTextEl.innerHTML += message.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 40); /* تسريع الكتابة قليلاً لتناسب الجوال */
+                    setTimeout(typeWriter, 50); /* تسريع خفيف ليتناسب مع تجربة الجوال */
                     scrollLeft.scrollTop = scrollLeft.scrollHeight;
                 } else {
                     setTimeout(() => {
@@ -259,14 +263,14 @@
         }
 
         function openMemories() {
-            scrollLeft.classList.remove('active'); // إخفاء الرسالة أولاً
+            scrollLeft.classList.remove('active'); /* إغلاق الرسالة السابقة لتصفية النظر */
             setTimeout(() => {
-                scrollRight.classList.add('active'); // إظهار التذكار في المنتصف
-            }, 400);
+                scrollRight.classList.add('active'); /* فتح مربع تاريخنا بالمنتصف فخامة */
+            }, 300);
         }
 
         function createParticles() {
-            for (let i = 0; i < 80; i++) { /* تقليل العدد قليلاً لراحة معالجات الجوال */
+            for (let i = 0; i < 90; i++) { /* تقليل طفيف لتفادي تعليق الجوالات */
                 const p = document.createElement('div');
                 p.className = 'particle';
                 p.style.left = Math.random() * 100 + 'vw';
