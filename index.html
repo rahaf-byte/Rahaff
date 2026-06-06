@@ -110,7 +110,7 @@
             position: absolute;
             top: 10%; 
             width: 300px; 
-            height: 80vh; /* صاروا الاثنين بنفس الطول الفخم */
+            height: 80vh; 
             background: #fdf5e6;
             border: 2px solid #d2b48c;
             border-radius: 15px;
@@ -124,7 +124,7 @@
         #scroll-left { left: -400px; } 
         #scroll-left.active { left: 3%; }
         
-        /* موقع مربع الذكرى (يمين) - صار أطول الحين */
+        /* موقع مربع الذكرى (يمين) */
         #scroll-right { right: -400px; border-color: #c2185b; } 
         #scroll-right.active { right: 3%; }
 
@@ -133,6 +133,33 @@
 
         .particle { position: absolute; bottom: -50px; animation: riseUp linear infinite; }
         @keyframes riseUp { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
+
+        /* 📱 تعديلات خاصة بمقاس الجوال فقططططط وبدون تغيير أي كود أصلي */
+        @media (max-width: 768px) {
+            #countdown { font-size: 4.5rem; width: 100%; text-align: center; }
+            .cake-container { transform: scale(0.85); margin-top: -30px; }
+            .Happy__Birthday { font-size: 1.6rem; width: 90%; margin: 15px auto; }
+            #btns { width: 240px; }
+            .btn { font-size: 1rem; padding: 10px 20px; }
+            
+            /* جعل الكروت تفتح في منتصف شاشة الجوال تماماً بشكل مرتب */
+            .scroll {
+                left: 50% !important;
+                right: auto !important;
+                top: 50% !important;
+                width: 88% !important;
+                height: 75vh !important;
+                padding: 20px !important;
+                opacity: 0;
+                pointer-events: none;
+            }
+            #scroll-left { transform: translate(-50%, -50%) scale(0.7); }
+            #scroll-left.active { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+            
+            #scroll-right { transform: translate(-50%, -50%) scale(0.7); }
+            #scroll-right.active { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+            .letter-content { font-size: 15px; }
+        }
     </style>
 </head>
 <body>
